@@ -1,0 +1,54 @@
+{
+  "name": "hf-upload",
+  "version": "0.1.0",
+  "author": "TAPSIN",
+  "description": "Cross-platform Hugging Face upload desktop app",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && electron .\"",
+    "build": "vite build",
+    "dist:linux": "npm run build && electron-builder --linux AppImage",
+    "dist:windows": "npm run build && electron-builder --win nsis",
+    "start": "electron ."
+  },
+  "build": {
+    "appId": "com.tapsin.hfupload",
+    "productName": "HF Upload",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Development"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "concurrently": "latest",
+    "electron": "latest",
+    "electron-builder": "latest",
+    "vite": "latest",
+    "wait-on": "latest"
+  },
+  "dependencies": {
+    "@huggingface/hub": "^2.17.5",
+    "apache-arrow": "^21.2.0",
+    "dicom-parser": "^1.8.21",
+    "lucide-react": "latest",
+    "parquet-wasm": "^0.9.0",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}
